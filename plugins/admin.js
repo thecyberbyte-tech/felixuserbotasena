@@ -27,15 +27,26 @@ Asena.addCommand({pattern: 'ban ?(.*)', fromMe: true, onlyGroup: true, desc: Lan
 
     if (Config.BANMSG == 'default') {
         if (message.reply_message !== false) {
-            await message.client.sendMessage(message.jid,'@' + message.reply_message.data.participant.split('@')[0] + '```, ' + Lang.BANNED + '```', MessageType.text, {contextInfo: {mentionedJid: [message.reply_message.data.participant]}});
+            await message.client.sendMessage(
+                message.jid, 
+                fs.readFileSync("/root/WhatsAsenaDuplicated/media/gif/M8kc.gif"),
+                MessageType.video, 
+                { mimetype: Mimetype.gif, caption: "FelixBlack Tarafından Banlandın hahaha!" }
+            )
+            await message.client.sendMessage(message.jid,'```zavallı``` ' +'@' + message.reply_message.data.participant.split("@")[0] + ' 😈', MessageType.text, {contextInfo: {mentionedJid: [message.reply_message.data.participant]}});
             await message.client.groupRemove(message.jid, [message.reply_message.data.participant]);
         } else if (message.reply_message === false && message.mention !== false) {
             var etiketler = '';
             message.mention.map(async (user) => {
-                etiketler += '@' + user.split('@')[0] + ',';
+                etiketler += '@' + user.split("@")[0];
             });
-
-            await message.client.sendMessage(message.jid,etiketler + '```, ' + Lang.BANNED + '```', MessageType.text, {contextInfo: {mentionedJid: message.mention}});
+            await message.client.sendMessage(
+                message.jid, 
+                fs.readFileSync("/root/WhatsAsenaDuplicated/media/gif/M8kc.gif"),
+                MessageType.video, 
+                { mimetype: Mimetype.gif, caption: "FelixBlack Tarafından Banlandın hahaha!" }
+            )
+            await message.client.sendMessage(message.jid,'```zavallı``` ' + etiketler + ' 😈', MessageType.text, {contextInfo: {mentionedJid: message.mention}});
             await message.client.groupRemove(message.jid, message.mention);
         } else {
             return await message.client.sendMessage(message.jid,Lang.GIVE_ME_USER,MessageType.text);
@@ -43,14 +54,14 @@ Asena.addCommand({pattern: 'ban ?(.*)', fromMe: true, onlyGroup: true, desc: Lan
     }
     else {
         if (message.reply_message !== false) {
-            await message.client.sendMessage(message.jid,'@' + message.reply_message.data.participant.split('@')[0] + Config.BANMSG, MessageType.text, {contextInfo: {mentionedJid: [message.reply_message.data.participant]}});
+            await message.client.sendMessage(message.jid,'@' + message.reply_message.data.participant.split("@")[0] + Config.BANMSG, MessageType.text, {contextInfo: {mentionedJid: [message.reply_message.data.participant]}});
             await message.client.groupRemove(message.jid, [message.reply_message.data.participant]);
         } else if (message.reply_message === false && message.mention !== false) {
             var etiketler = '';
             message.mention.map(async (user) => {
-                etiketler += '@' + user.split('@')[0] + ',';
+                etiketler += '@' + user.split("@")[0] + ',';
             });
-
+            
             await message.client.sendMessage(message.jid,etiketler + Config.BANMSG, MessageType.text, {contextInfo: {mentionedJid: message.mention}});
             await message.client.groupRemove(message.jid, message.mention);
         } else {
